@@ -54,4 +54,3 @@ class CustomerCarHasProducts(Base):
     products_product_id = Column(ForeignKey('product_id'), primary_key=True)
     customerCar = relationship('CustomerCar', back_populates='product')
     product = relationship('Products', back_populates='customerCar')
-
