@@ -2,13 +2,13 @@ services:
 
   db:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    container_name: GruppFyra
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Myservername
       MYSQL_DATABASE: manufacturing
     cap_add:
       - SYS_NICE
-      -
     ports:
       - 8080:8080
+
