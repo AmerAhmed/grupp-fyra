@@ -1,9 +1,9 @@
-import sqlalchemy
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-engine = sqlalchemy.create_engine(
-    f"mysql+mysqlconnector://root:Myservername@localhost:8080/manufacturing"
-)
+engine = create_engine("mysql+mysqlconnector://root:Myservername@localhost:3306/manufacturing")
+
 
 Base = declarative_base()
 Session = sessionmaker()

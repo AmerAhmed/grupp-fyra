@@ -1,7 +1,7 @@
 import datetime
-
-from app.db import Base
-from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
+from app.db import *
+from sqlalchemy import Column, Integer, String, DECIMAL
+from sqlalchemy import ForeignKey
 from sqlalchemy.types import DateTime
 from sqlalchemy.orm import relationship
 
@@ -47,7 +47,6 @@ class Products(Base):
 
 
 class CustomerCarHasProducts(Base):
-
     __tablename__ = 'customerCar_has_product'
 
     customerCar_customerCar_id = Column(ForeignKey('customerCar.id'), primary_key=True)
