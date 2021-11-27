@@ -57,7 +57,6 @@ A customer can have several cars. Steps to take:
 keys and other constraints will be right
 * Test that you can enter data and access it and that the relationships between
 the tables work
----
 Generate data to fill the database with that you can use in development
 * Make a dump of the database and version it with the rest of your project
 * Make a simpler Python program where you can view, change and update the data in
