@@ -1,8 +1,8 @@
 import datetime
 from app.db import *
-from sqlalchemy import Column, Integer, String, DECIMAL
+from sqlalchemy import Column, Integer, String
+from sqlalchemy import DECIMAL, DateTime
 from sqlalchemy import ForeignKey
-from sqlalchemy.types import DateTime
 from sqlalchemy.orm import relationship
 
 
@@ -14,14 +14,14 @@ class CustomerCar(Base):
     brand = Column(String(50), nullable=False)
     car_model = Column(String(50), nullable=False)
     car_color = Column(String(50), nullable=False)
-    year_model = Column(DateTime, default=datetime.datetime.now())
+    year_model = Column(DateTime, default=datetime.datetime.utcnow())
     customerCar = relationship('CustomerCarHasProducts', back_populates='product')
 
 
 class Customers(Base):
     __tablename__ = 'customers'
 
-    customer_id = Column(Integer, primary_key=True, autoincrement=True)
+    customers_id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
     address = Column(String(50), nullable=False)
@@ -47,9 +47,9 @@ class Products(Base):
 
 
 class CustomerCarHasProducts(Base):
-    __tablename__ = 'customerCar_has_product'
+    __tablename__ = 'customerCar_has_products'
 
-    customerCar_customerCar_id = Column(ForeignKey('customerCar.id'), primary_key=True)
-    products_product_id = Column(ForeignKey('product_id'), primary_key=True)
+    product_id = Column(ForeignKey('products.product_id'), primary_key=True)
+    customers_id = Column(ForeignKey('customers.customer_id'), primary_key=True)
     customerCar = relationship('CustomerCar', back_populates='product')
     product = relationship('Products', back_populates='customerCar')
