@@ -32,12 +32,16 @@ class Customers(Base):
     zip_code = Column(String(50), nullable=False)
     country = Column(String(50), nullable=False)
     customers = relationship('CustomersHasCustomerCar', back_populates='customer')
+    employee_id = Column(ForeignKey('customers.employee_id'))
+    customer = relationship('Employees', back_populates='employee_customer')
+    order = relationship('Order', back_populates='customer')
 
 
 class Products(Base):
     __tablename__ = 'products'
 
     product_id = Column(Integer, primary_key=True, autoincrement=True)
+    reseller_id = Column(ForeignKey('reseller.reseller_id'), primary_key=True)
     product_name = Column(String(50), nullable=False, unique=True)
     product_number = Column(String(50), nullable=False, unique=True)
     product_vendor = Column(String(50), nullable=False)
@@ -45,6 +49,8 @@ class Products(Base):
     quantityin_stock = Column(Integer, nullable=False, unsigned=True)
     buy_price = Column(DECIMAL(10.0), nullable=False)
     products = relationship('CustomerCarHasProducts', back_populates='customerCar')
+    products_details = relationship('OrderDetails', back_populates='order_details')
+    product = relationship('Reseller', back_populates='resellers')
 
 
 class CustomerCarHasProducts(Base):
@@ -64,23 +70,6 @@ class CustomersHasCustomerCar(Base):
     customer = relationship('Customers', back_populates='customers')
 
 
-class Employees(Base):
-    __tablename__ = 'employees'
-
-    employee_id = Column(Integer, primary_key=True, autoincrement=True)
-    first_name = Column(String(50), nullable=False)
-    last_name = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False, unique=True)
-    phone = Column(String(50), nullable=False)
-
-
-class Manufacturer(Base):
-    __tablename__ = 'manufacturer'
-
-    manufacturer_id = Column(Integer, primary_key=True, autoincrement=True)
-    manufacturer_name = Column(String(50), nullable=False)
-
-
 class Offices(Base):
     __tablename__ = 'offices'
 
@@ -93,6 +82,20 @@ class Offices(Base):
     employee_name = Column(String(50), nullable=False)
     employee_phone_number = Column(String(50), nullable=False)
     employee_email = Column(String(50), nullable=False)
+    employee = relationship('Employees', back_populates='offices')
+
+
+class Employees(Base):
+    __tablename__ = 'employees'
+
+    employee_id = Column(Integer, primary_key=True, autoincrement=True)
+    first_name = Column(String(50), nullable=False)
+    last_name = Column(String(50), nullable=False)
+    email = Column(String(50), nullable=False, unique=True)
+    phone = Column(String(50), nullable=False)
+    offices_id = Column(ForeignKey('employees.offices_id'))
+    offices = relationship('Offices', back_populates='employee')
+    employee_customer = relationship('Customers', back_populates='customer')
 
 
 class Order(Base):
@@ -102,23 +105,39 @@ class Order(Base):
     order_date = Column(DateTime, default=datetime.datetime.utcnow())
     shipping_date = Column(DateTime, default=datetime.datetime.utcnow())
     status = Column(String(50), nullable=False)
+    customers_id = Column(ForeignKey('order.customers_id'), primary_key=True)
+    customer = relationship('Customers', back_populates='order')
 
 
 class OrderDetail(Base):
     __tablename__ = 'orderDetail'
 
     order_order_id = Column(Integer, primary_key=True, autoincrement=True)
+    product_id = Column(ForeignKey('orderDetail.product_id'), primary_key=True)
+    order_id = Column(ForeignKey('orderDetail.order_id'), primary_key=True)
     quantity_order = Column(Integer)
     price_each = Column(DECIMAL(10.0))
     created_at = Column(DateTime, default=datetime.datetime.utcnow())
+    order_details = relationship('Products', back_populates='products_details')
 
 
 class Reseller(Base):
     __tablename__ = 'reseller'
 
     reseller_id = Column(Integer, primary_key=True, autoincrement=True)
-    reseller_name = Column(String(50),nullable=False)
+    reseller_name = Column(String(50), nullable=False)
     reseller_address = Column(String(50), nullable=False)
     reseller_contact_person = Column(String(50), nullable=False)
     reseller_phone_number = Column(String(50), nullable=False)
     reseller_email = Column(String(50), nullable=False)
+    manufacturer_id = Column(ForeignKey('reseller.manufacturer_id'), primary_key=True)
+    reseller = relationship('Manufacturer', back_populates='manufacturer')
+    resellers = relationship('Products', back_populates='product')
+
+
+class Manufacturer(Base):
+    __tablename__ = 'manufacturer'
+
+    manufacturer_id = Column(Integer, primary_key=True, autoincrement=True)
+    manufacturer_name = Column(String(50), nullable=False)
+    manufacturer = relationship('Manufacturer', back_populates='reseller')
