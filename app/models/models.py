@@ -15,7 +15,7 @@ class CustomerCar(Base):
     car_model = Column(String(50), nullable=False)
     car_color = Column(String(50), nullable=False)
     year_model = Column(DateTime, default=datetime.datetime.utcnow())
-    customerCar = relationship('CustomerCarHasProducts', back_populates='product')
+    customerCar = relationship('CustomersHasCustomerCar', back_populates='customer_has_car')
 
 
 class Customers(Base):
@@ -31,6 +31,7 @@ class Customers(Base):
     state = Column(String(50), nullable=False)
     zip_code = Column(String(50), nullable=False)
     country = Column(String(50), nullable=False)
+    customers = relationship('CustomersHasCustomerCar', back_populates='customer')
 
 
 class Products(Base):
@@ -43,13 +44,81 @@ class Products(Base):
     product_description = Column(String(255), nullable=False)
     quantityin_stock = Column(Integer, nullable=False, unsigned=True)
     buy_price = Column(DECIMAL(10.0), nullable=False)
-    product = relationship('CustomerCarHasProducts', back_populates='customerCar')
+    products = relationship('CustomerCarHasProducts', back_populates='customerCar')
 
 
 class CustomerCarHasProducts(Base):
     __tablename__ = 'customerCar_has_products'
 
-    product_id = Column(ForeignKey('products.product_id'), primary_key=True)
-    customers_id = Column(ForeignKey('customers.customer_id'), primary_key=True)
-    customerCar = relationship('CustomerCar', back_populates='product')
-    product = relationship('Products', back_populates='customerCar')
+    product_id = Column(ForeignKey('customerCar_has_products.product_id'), primary_key=True)
+    customerCar_id = Column(ForeignKey('customerCar_has_products.customerCar_id'), primary_key=True)
+    customerCar = relationship('Products', back_populates='products')
+
+
+class CustomersHasCustomerCar(Base):
+    __tablename__ = 'customers_has_customerCar'
+
+    customers_id = Column(ForeignKey('customers_has_customerCar.customers_id'), primary_key=True)
+    customerCar_id = Column(ForeignKey('customers_has_customerCar.customers_id'), primary_key=True)
+    customer_has_car = relationship('CustomerCar', back_populates='customerCar')
+    customer = relationship('Customers', back_populates='customers')
+
+
+class Employees(Base):
+    __tablename__ = 'employees'
+
+    employee_id = Column(Integer, primary_key=True, autoincrement=True)
+    first_name = Column(String(50), nullable=False)
+    last_name = Column(String(50), nullable=False)
+    email = Column(String(50), nullable=False, unique=True)
+    phone = Column(String(50), nullable=False)
+
+
+class Manufacturer(Base):
+    __tablename__ = 'manufacturer'
+
+    manufacturer_id = Column(Integer, primary_key=True, autoincrement=True)
+    manufacturer_name = Column(String(50), nullable=False)
+
+
+class Offices(Base):
+    __tablename__ = 'offices'
+
+    offices_id = Column(Integer, primary_key=True, autoincrement=True)
+    offices_code = Column(Integer)
+    offices_name = Column(String(50), nullable=False)
+    offices_address = Column(String(50), nullable=False)
+    offices_number = Column(String(50), nullable=False)
+    contact_employee = Column(String(50), nullable=False)
+    employee_name = Column(String(50), nullable=False)
+    employee_phone_number = Column(String(50), nullable=False)
+    employee_email = Column(String(50), nullable=False)
+
+
+class Order(Base):
+    __tablename__ = 'order'
+
+    order_id = Column(Integer, primary_key=True, autoincrement=True)
+    order_date = Column(DateTime, default=datetime.datetime.utcnow())
+    shipping_date = Column(DateTime, default=datetime.datetime.utcnow())
+    status = Column(String(50), nullable=False)
+
+
+class OrderDetail(Base):
+    __tablename__ = 'orderDetail'
+
+    order_order_id = Column(Integer, primary_key=True, autoincrement=True)
+    quantity_order = Column(Integer)
+    price_each = Column(DECIMAL(10.0))
+    created_at = Column(DateTime, default=datetime.datetime.utcnow())
+
+
+class Reseller(Base):
+    __tablename__ = 'reseller'
+
+    reseller_id = Column(Integer, primary_key=True, autoincrement=True)
+    reseller_name = Column(String(50),nullable=False)
+    reseller_address = Column(String(50), nullable=False)
+    reseller_contact_person = Column(String(50), nullable=False)
+    reseller_phone_number = Column(String(50), nullable=False)
+    reseller_email = Column(String(50), nullable=False)
