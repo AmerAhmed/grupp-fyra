@@ -196,4 +196,3 @@ class Manufacturer(Base):
 
     def __repr__(self):
         return f'{self.manufacturer_id} {self.reseller} {self.address}'
-
