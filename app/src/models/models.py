@@ -1,5 +1,5 @@
 import datetime
-from app.dll.db import *
+from app.src.db import *
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import DECIMAL, DateTime
 from sqlalchemy import ForeignKey

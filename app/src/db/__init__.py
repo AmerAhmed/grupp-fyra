@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from app.config.settings import *
 
-engine = create_engine("mysql+mysqlconnector://root:Myservername@localhost:3306/manufacturing")
+engine = create_engine(f"mysql+mysqlconnector://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}")
 
 
 Base = declarative_base()

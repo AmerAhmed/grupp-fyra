@@ -1,5 +1,5 @@
-from app.dll.db import session
-from app.dll.models.models import CustomerCar
+from app.src.db import session
+from app.src.models.models import CustomerCar
 
 
 def get_car_parts():

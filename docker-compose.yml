@@ -5,7 +5,7 @@ services:
     container_name: GruppFyra
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: Myservername
+      MYSQL_ROOT_PASSWORD: PASSWORD
       MYSQL_DATABASE: manufacturing
     cap_add:
       - SYS_NICE

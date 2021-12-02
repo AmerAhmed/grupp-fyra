@@ -11,6 +11,9 @@
 # Icon must end with two \r
 Icon
 
+# config file
+app/config/settings.py
+
 
 # Thumbnails
 ._*

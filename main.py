@@ -1,4 +1,4 @@
-from app.bll.controllers import get_car_parts
+from app.controllers.controllers import get_car_parts
 
 
 def main():
