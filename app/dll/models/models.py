@@ -42,6 +42,7 @@ class Offices(Base):
         {self.offices_address} {self.offices_number}
         {self.contact_employee} {self.employee_name}
         {self.employee_phone_number} {self.employee_email}
+        {self.employee}
         """
 
 
@@ -58,7 +59,7 @@ class Employees(Base):
     customers = relationship('Customers', back_populates='employee')
 
     def __repr__(self):
-        return f'{self.first_name} {self.last_name} {self.email} {self.phone} {self.customers}'
+        return f'{self.first_name} {self.last_name} {self.email} {self.phone} {self.offices} {self.customers}'
 
 
 class Customers(Base):
@@ -83,7 +84,7 @@ class Customers(Base):
         return f"""
         {self.first_name} {self.last_name} {self.address}
         {self.phone} {self.email}{self.city} {self.state}
-        {self.zipcode} {self.country}
+        {self.zipcode} {self.country} {self.employee} {self.cars} {self.order}   
         """
 
 
@@ -110,7 +111,7 @@ class CustomerCarHasProducts(Base):
     customer = relationship('CustomerCar', back_populates='products')
 
     def __repr__(self):
-        return f'{self.product} {self.customerCar}'
+        return f'{self.product} {self.customer}'
 
 
 class CustomersHasCustomerCar(Base):
@@ -122,7 +123,7 @@ class CustomersHasCustomerCar(Base):
     customer = relationship('Customers', back_populates='cars')
 
     def __repr__(self):
-        return f'{self.car} {self.last_name} {self.customer}'
+        return f'{self.car} {self.customer}'
 
 
 class OrderDetails(Base):
@@ -182,8 +183,9 @@ class Reseller(Base):
 
     def __repr__(self):
         return f"""
-        {self.reseller_name} {self.reseller_address} {self.reseller_contact_person}
-        {self.reseller_phone_number} {self.reseller_email}{self.manufacturer} {self.products}
+        {self.reseller_name} {self.reseller_address} 
+        {self.reseller_contact_person} {self.reseller_phone_number} 
+        {self.reseller_email} {self.manufacturer} {self.products}
         """
 
 
@@ -195,4 +197,4 @@ class Manufacturer(Base):
     reseller = relationship('Manufacturer', back_populates='manufacturer')
 
     def __repr__(self):
-        return f'{self.manufacturer_id} {self.reseller} {self.address}'
+        return f'{self.manufacturer_name} {self.reseller}'
