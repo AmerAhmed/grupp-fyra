@@ -1,5 +1,8 @@
+from app.bll.controllers import get_car_parts
+
+
 def main():
-    pass
+    get_car_parts()
 
 
 if __name__ == '__main__':

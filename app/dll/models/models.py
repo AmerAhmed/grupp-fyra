@@ -10,16 +10,16 @@ class CustomerCar(Base):
     __tablename__ = 'customerCar'
 
     customerCar_id = Column(Integer, primary_key=True, autoincrement=True)
-    reg_number = Column(String(7), nullable=False, unique=True)
+    reg_number = Column(String(7), nullable=False)
     brand = Column(String(50), nullable=False)
     model = Column(String(50), nullable=False)
     color = Column(String(50), nullable=False)
     years = Column(DateTime, default=datetime.datetime.utcnow())
     customers = relationship('CustomersHasCustomerCar', back_populates='car')
-    products = relationship('CustomerCarHasProducts', back_populates='customer')
+    products = relationship('CustomerCarHasProducts', back_populates='customerCar')
 
     def __repr__(self):
-        return f'{self.reg_number} {self.brand} {self.model} {self.color} {self.year} {self.customer} - {self.products}'
+        return f'{self.reg_number} {self.brand} {self.model} {self.color} {self.years}'
 
 
 class Offices(Base):
@@ -52,7 +52,7 @@ class Employees(Base):
     employee_id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False, unique=True)
+    email = Column(String(50), nullable=False)
     phone = Column(String(50), nullable=False)
     offices_offices_id = Column(Integer, ForeignKey('offices.offices_id'), primary_key=True)
     offices = relationship('Offices', back_populates='employee')
@@ -70,7 +70,7 @@ class Customers(Base):
     last_name = Column(String(50), nullable=False)
     address = Column(String(50), nullable=False)
     phone = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False, unique=True)
+    email = Column(String(50), nullable=False)
     city = Column(String(50), nullable=False)
     state = Column(String(50), nullable=False)
     zip_code = Column(String(50), nullable=False)
@@ -78,7 +78,7 @@ class Customers(Base):
     employees_employee_id = Column(Integer, ForeignKey('employees.employee_id'), primary_key=True)
     employee = relationship('Employees', back_populates='customers')
     cars = relationship('CustomersHasCustomerCar', back_populates='customer')
-    order = relationship('Order', back_populates='customer')
+    order = relationship('Orders', back_populates='customer')
 
     def __repr__(self):
         return f"""
@@ -94,7 +94,7 @@ class Orders(Base):
     order_id = Column(Integer, primary_key=True, autoincrement=True)
     order_date = Column(DateTime, default=datetime.datetime.utcnow())
     shipping_date = Column(DateTime, default=datetime.datetime.utcnow())
-    customers_id = Column(ForeignKey('order.customers_id'), primary_key=True)
+    customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
     customer = relationship('Customers', back_populates='order')
     orders = relationship('OrderDetails', back_populates='order_details')
 
@@ -107,8 +107,8 @@ class CustomerCarHasProducts(Base):
 
     products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
     customerCar_customerCar_id = Column(Integer, ForeignKey('customerCar.customerCar_id'), primary_key=True)
-    product = relationship('Products', back_populates='customers')
-    customer = relationship('CustomerCar', back_populates='products')
+    product = relationship('Products', back_populates='customerCars')
+    customerCar = relationship('CustomerCar', back_populates='products')
 
     def __repr__(self):
         return f'{self.product} {self.customer}'
@@ -152,13 +152,12 @@ class Products(Base):
     product_number = Column(String(50), nullable=False, unique=True)
     product_vendor = Column(String(50), nullable=False)
     product_description = Column(String(255), nullable=False)
-    quantityin_stock = Column(Integer, nullable=False, unsigned=True)
+    quantityin_stock = Column(Integer, nullable=False)
     buy_price = Column(DECIMAL(10.0), nullable=False)
     reseller_reseller_id = Column(Integer, ForeignKey('reseller.reseller_id'), primary_key=True)
     reseller = relationship('Reseller', back_populates='products')
-    products = relationship('CustomerCarHasProducts', back_populates='customerCar')
     product = relationship('OrderDetails', back_populates='product_details')
-    customers = relationship('CustomerCarHasProducts', back_populates='product')
+    customerCars = relationship('CustomerCarHasProducts', back_populates='product')
 
     def __repr__(self):
         return f"""
@@ -178,7 +177,7 @@ class Reseller(Base):
     reseller_phone_number = Column(String(50), nullable=False)
     reseller_email = Column(String(50), nullable=False)
     manufacturer_manufacturer_id = Column(Integer, ForeignKey('manufacturer.manufacturer_id'), primary_key=True)
-    manufacturer = relationship('Manufacturer', back_populates='reseller')
+    manufacturer = relationship('Manufacturer', back_populates='manufacturers')
     products = relationship('Products', back_populates='reseller')
 
     def __repr__(self):
@@ -194,7 +193,7 @@ class Manufacturer(Base):
 
     manufacturer_id = Column(Integer, primary_key=True, autoincrement=True)
     manufacturer_name = Column(String(50), nullable=False)
-    reseller = relationship('Manufacturer', back_populates='manufacturer')
+    manufacturers = relationship('Reseller', back_populates='manufacturer')
 
     def __repr__(self):
-        return f'{self.manufacturer_name} {self.reseller}'
+        return f'{self.manufacturer_name} {self.manufacturers}'
