@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`offices` (
   `offices_name` VARCHAR(50) NOT NULL,
   `offices_address` VARCHAR(50) NOT NULL,
   `phone_number` VARCHAR(50) NOT NULL,
-  `contact_employee` VARCHAR(50) NULL,
   `employee_name` VARCHAR(50) NULL,
   `employee_phone_number` VARCHAR(50) NULL,
   `employee_email` VARCHAR(50) NULL,
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`products` (
   `products_vendor` VARCHAR(50) NOT NULL,
   `product_description` LONGTEXT NOT NULL,
   `quantityin_stock` INT NOT NULL,
-  `buy_price` DECIMAL NOT NULL,
+  `buy_price` DOUBLE NOT NULL,
   `reseller_reseller_id` INT NOT NULL,
   PRIMARY KEY (`product_id`),
   INDEX `fk_products_reseller1_idx` (`reseller_reseller_id` ASC) VISIBLE,
@@ -138,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCar` (
   `brand` VARCHAR(50) NOT NULL,
   `model` VARCHAR(50) NOT NULL,
   `color` VARCHAR(50) NOT NULL,
-  `years` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `years` DATE NOT NULL,
   PRIMARY KEY (`customerCar_id`))
 ENGINE = InnoDB;
 
@@ -150,7 +149,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `manufacturing`.`orders` (
   `order_id` INT NOT NULL AUTO_INCREMENT,
   `order_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `shipping_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `shipped_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `customers_customers_id` INT NOT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_orders_customers1_idx` (`customers_customers_id` ASC) VISIBLE,
@@ -184,7 +183,6 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`orderDetails` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-
 
 
 

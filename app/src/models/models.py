@@ -29,8 +29,7 @@ class Offices(Base):
     offices_code = Column(Integer)
     offices_name = Column(String(50), nullable=False)
     offices_address = Column(String(50), nullable=False)
-    offices_number = Column(String(50), nullable=False)
-    contact_employee = Column(String(50), nullable=False)
+    phone_number = Column(String(50), nullable=False)
     employee_name = Column(String(50), nullable=False)
     employee_phone_number = Column(String(50), nullable=False)
     employee_email = Column(String(50), nullable=False)
@@ -39,9 +38,9 @@ class Offices(Base):
     def __repr__(self):
         return f"""
         {self.offices_code} {self.offices_name}
-        {self.offices_address} {self.offices_number}
-        {self.contact_employee} {self.employee_name}
-        {self.employee_phone_number} {self.employee_email}
+        {self.offices_address} {self.phone_number}
+        {self.employee_name} {self.employee_phone_number} 
+        {self.employee_email}
         {self.employee}
         """
 
@@ -93,7 +92,7 @@ class Orders(Base):
 
     order_id = Column(Integer, primary_key=True, autoincrement=True)
     order_date = Column(DateTime, default=datetime.datetime.utcnow())
-    shipping_date = Column(DateTime, default=datetime.datetime.utcnow())
+    shipped_date = Column(DateTime, default=datetime.datetime.utcnow())
     customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
     customer = relationship('Customers', back_populates='order')
     orders = relationship('OrderDetails', back_populates='order_details')
@@ -111,7 +110,7 @@ class CustomerCarHasProducts(Base):
     customerCar = relationship('CustomerCar', back_populates='products')
 
     def __repr__(self):
-        return f'{self.product} {self.customer}'
+        return f'{self.product} {self.customerCar}'
 
 
 class CustomersHasCustomerCar(Base):
@@ -163,7 +162,7 @@ class Products(Base):
         return f"""
         {self.product_name} {self.product_number} {self.product_vendor}
         {self.product_description} {self.quantityin_stock} {self.buy_price}
-        {self.reseller} {self.products} {self.products} {self.customers}
+        {self.reseller} {self.product} {self.customerCars}
         """
 
 
