@@ -1,5 +1,5 @@
 
-INSERT INTO  products (product_name, product_number, products_vendor, product_description, quantityin_stock, buy_price, reseller_reseller_id) VALUES
+INSERT INTO  products (product_name, product_number, product_vendor, product_description, quantityin_stock, buy_price, reseller_reseller_id) VALUES
 ('Shrimp - Prawn', 43, 'Schneider-Marvin', 'potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus', 32, 137.13, 51),
 ('Daves Island Stinger', 80, 'Tromp-Schuster', 'orci mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum', 48, 133.39, 52),
 ('Pork - Bacon Cooked Slcd', 89, 'Rolfson, Mills and Mitchell', 'convallis nulla neque libero convallis eget eleifend luctus ultricies eu', 31, 180.42, 53),
