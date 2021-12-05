@@ -19,7 +19,14 @@ USE `manufacturing` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`manufacturer` (
   `manufacturer_id` INT NOT NULL AUTO_INCREMENT,
-  `manufacturer_name` VARCHAR(50) NOT NULL,
+  `manufacturer_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `contact_name` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `city` VARCHAR(100) NOT NULL,
+  `country` VARCHAR(100) NOT NULL,
+  `zip_code` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`manufacturer_id`))
 ENGINE = InnoDB;
 
@@ -30,12 +37,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `manufacturing`.`offices` (
   `offices_id` INT NOT NULL AUTO_INCREMENT,
   `offices_code` INT NOT NULL,
-  `offices_name` VARCHAR(50) NOT NULL,
-  `offices_address` VARCHAR(50) NOT NULL,
-  `phone_number` VARCHAR(50) NOT NULL,
-  `employee_name` VARCHAR(50) NULL,
-  `employee_phone_number` VARCHAR(50) NULL,
-  `employee_email` VARCHAR(50) NULL,
+  `offices_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(100) NOT NULL,
+  `employee_name` VARCHAR(100) NOT NULL,
+  `employee_phone` VARCHAR(100) NOT NULL,
+  `employee_email` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`offices_id`))
 ENGINE = InnoDB;
 
@@ -45,10 +52,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`employees` (
   `employee_id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(50) NOT NULL,
-  `last_name` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
-  `phone` VARCHAR(50) NOT NULL,
+  `first_name` VARCHAR(100) NOT NULL,
+  `last_name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(100) NOT NULL,
   `offices_offices_id` INT NOT NULL,
   PRIMARY KEY (`employee_id`),
   INDEX `fk_employees_offices1_idx` (`offices_offices_id` ASC) VISIBLE,
@@ -65,11 +72,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`reseller` (
   `reseller_id` INT NOT NULL AUTO_INCREMENT,
-  `reseller_name` VARCHAR(50) NOT NULL,
-  `reseller_address` VARCHAR(50) NOT NULL,
-  `reseller_contact_person` VARCHAR(50) NOT NULL,
-  `reseller_phone_number` VARCHAR(50) NOT NULL,
-  `reseller_email` VARCHAR(50) NOT NULL,
+  `reseller_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `contact_name` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
   `manufacturer_manufacturer_id` INT NOT NULL,
   PRIMARY KEY (`reseller_id`),
   INDEX `fk_reseller_manufacturer1_idx` (`manufacturer_manufacturer_id` ASC) VISIBLE,
@@ -86,12 +93,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`products` (
   `product_id` INT NOT NULL AUTO_INCREMENT,
-  `product_name` VARCHAR(50) NOT NULL,
-  `product_number` VARCHAR(50) NOT NULL,
-  `products_vendor` VARCHAR(50) NOT NULL,
+  `product_name` VARCHAR(100) NOT NULL,
+  `product_number` VARCHAR(100) NOT NULL,
+  `products_vendor` VARCHAR(100) NOT NULL,
   `product_description` LONGTEXT NOT NULL,
   `quantityin_stock` INT NOT NULL,
-  `buy_price` DOUBLE NOT NULL,
+  `buy_price` DECIMAL NOT NULL,
   `reseller_reseller_id` INT NOT NULL,
   PRIMARY KEY (`product_id`),
   INDEX `fk_products_reseller1_idx` (`reseller_reseller_id` ASC) VISIBLE,
@@ -108,15 +115,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`customers` (
   `customers_id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(50) NOT NULL,
-  `last_name` VARCHAR(50) NOT NULL,
-  `address` VARCHAR(50) NOT NULL,
-  `phone` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
-  `city` VARCHAR(50) NOT NULL,
-  `state` VARCHAR(50) NOT NULL,
+  `first_name` VARCHAR(100) NOT NULL,
+  `last_name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `city` VARCHAR(100) NOT NULL,
   `zip_code` VARCHAR(50) NOT NULL,
-  `country` VARCHAR(50) NOT NULL,
+  `country` VARCHAR(100) NOT NULL,
   `employees_employee_id` INT NOT NULL,
   PRIMARY KEY (`customers_id`),
   INDEX `fk_customers_employees1_idx` (`employees_employee_id` ASC) VISIBLE,
@@ -134,13 +140,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCar` (
   `customerCar_id` INT NOT NULL AUTO_INCREMENT,
   `reg_number` VARCHAR(7) NOT NULL,
-  `brand` VARCHAR(50) NOT NULL,
-  `model` VARCHAR(50) NOT NULL,
+  `brand` VARCHAR(100) NOT NULL,
+  `model` VARCHAR(100) NOT NULL,
   `color` VARCHAR(50) NOT NULL,
   `years` DATE NOT NULL,
   PRIMARY KEY (`customerCar_id`))
 ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
@@ -148,8 +153,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`orders` (
   `order_id` INT NOT NULL AUTO_INCREMENT,
-  `order_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `shipped_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_date` DATE NOT NULL,
+  `shipped_date` DATE NOT NULL,
   `customers_customers_id` INT NOT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_orders_customers1_idx` (`customers_customers_id` ASC) VISIBLE,
@@ -166,7 +171,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`orderDetails` (
   `quantity_ordered` INT NOT NULL,
-  `price_each` DECIMAL(10,0) NOT NULL,
+  `price_each` DOUBLE NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `products_product_id` INT NOT NULL,
   `orders_order_id` INT NOT NULL,
@@ -183,7 +188,6 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`orderDetails` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
