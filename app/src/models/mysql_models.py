@@ -1,5 +1,5 @@
 import datetime
-from app.src.db import *
+from app.src.mysqldb import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import DECIMAL, DateTime
 from sqlalchemy import ForeignKey

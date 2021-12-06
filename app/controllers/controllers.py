@@ -1,7 +1,7 @@
-from app.src.db import session
-from app.src.models.models import CustomerCar, Products, Customers, Orders
-from app.src.models.models import Manufacturer
-from app.src.models.models import Offices, Employees
+from app.src.mysqldb import *
+from app.src.models.mysql_models import CustomerCar, Products, Customers, Orders
+from app.src.models.mysql_models import Manufacturer
+from app.src.models.mysql_models import Offices, Employees
 
 
 # CustomerCar
