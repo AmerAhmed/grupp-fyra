@@ -6,6 +6,7 @@ from app.src.models.models import Offices, Employees
 
 def get_car_parts():
     customer_cars = session.query(CustomerCar).all()
+    # customer_car = session.query(CustomerCar).filter(CustomerCar.customerCar_id == 10).first()
     for customer_car in customer_cars:
         print(customer_car)
 
@@ -34,7 +35,7 @@ def get_manufacturing():
 
 
 def get_products():
-    products = session.query(Products).filter(Products.product_id == 3).first()
+    products = session.query(Products).filter(Products.product_id == 1).first()
     print(products)
 
 # products = session.query(Products).all()
@@ -49,3 +50,7 @@ def get_customers():
 # products = session.query(Products).all()
 # for product in products:
 # print(product)
+
+
+
+

@@ -54,6 +54,7 @@ class Products(Base):
         QuantityInStock: {self.quantityin_stock}
         BuyPrice: {self.buy_price}
         OrderDetails: {self.order_details}
+        product_has_cars: {self.product_has_cars}
         """
 
 
@@ -103,6 +104,7 @@ class CustomerCar(Base):
 
     def __repr__(self):
         return f"""
+        CustomerCarID: {self.customerCar_id}
         RegisterNumber: {self.reg_number}
         CarBrand: {self.brand}
         CarModel: {self.model}
@@ -131,6 +133,7 @@ class Offices(Base):
         ************
         {self.offices_code} {self.offices_name} {self.address} {self.phone}
         {self.employee_name} {self.employee_phone} {self.employee_email}\t\n
+        EmployeeInfo: {self.employee}
         """
 
 
