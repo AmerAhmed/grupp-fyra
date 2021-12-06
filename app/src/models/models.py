@@ -171,7 +171,14 @@ class Orders(Base):
     orders = relationship('OrderDetails', back_populates='order')
 
     def __repr__(self):
-        return f'OrderDate: {self.order_date} ShippedDate: {self.shipped_date}'
+        return f"""
+               **********
+               OrderInfo:
+               **********
+               OrderDate: {self.order_date} 
+               ShippedDate: {self.shipped_date}
+               OrderDetails: {self.orders}
+               """
 
 
 class OrderDetails(Base):
