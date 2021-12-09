@@ -1,4 +1,5 @@
-INSERT INTO customerCar (reg_number, brand, model, color, years)  VALUES
+
+INSERT INTO customerCars (reg_number, brand, model, color, years)  VALUES
 ('SJ2014', 'Dodge', 'Ram 2500', 'Puce', '2020-06-27 07:52:54'),
 ('SJ2014', 'Aston Martin', 'DB9', 'Goldenrod', '2019-06-28 21:40:26'),
 ('FJ2014', 'Chrysler', 'Town & Country', 'Goldenrod', '2019-04-01 05:20:20'),

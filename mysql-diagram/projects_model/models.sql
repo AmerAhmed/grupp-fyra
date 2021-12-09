@@ -68,9 +68,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `manufacturing`.`reseller`
+-- Table `manufacturing`.`resellers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `manufacturing`.`reseller` (
+CREATE TABLE IF NOT EXISTS `manufacturing`.`resellers` (
   `reseller_id` INT NOT NULL AUTO_INCREMENT,
   `reseller_name` VARCHAR(100) NOT NULL,
   `address` VARCHAR(100) NOT NULL,
@@ -99,12 +99,12 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`products` (
   `product_description` LONGTEXT NOT NULL,
   `quantityin_stock` INT NOT NULL,
   `buy_price` DECIMAL NOT NULL,
-  `reseller_reseller_id` INT NOT NULL,
+  `resellers_reseller_id` INT NOT NULL,
   PRIMARY KEY (`product_id`),
-  INDEX `fk_products_reseller1_idx` (`reseller_reseller_id` ASC) VISIBLE,
-  CONSTRAINT `fk_products_reseller1`
-    FOREIGN KEY (`reseller_reseller_id`)
-    REFERENCES `manufacturing`.`reseller` (`reseller_id`)
+  INDEX `fk_products_resellers1_idx` (`resellers_reseller_id` ASC) VISIBLE,
+  CONSTRAINT `fk_products_resellers1`
+    FOREIGN KEY (`resellers_reseller_id`)
+    REFERENCES `manufacturing`.`resellers` (`reseller_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -135,9 +135,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `manufacturing`.`customerCar`
+-- Table `manufacturing`.`customerCars`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCar` (
+CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCars` (
   `customerCar_id` INT NOT NULL AUTO_INCREMENT,
   `reg_number` VARCHAR(7) NOT NULL,
   `brand` VARCHAR(100) NOT NULL,
@@ -148,46 +148,35 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCar` (
 ENGINE = InnoDB;
 
 
+
 -- -----------------------------------------------------
 -- Table `manufacturing`.`orders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `manufacturing`.`orders` (
   `order_id` INT NOT NULL AUTO_INCREMENT,
-  `order_date` DATE NOT NULL,
-  `shipped_date` DATE NOT NULL,
+  `quantity_ordered` INT NULL,
+  `price_each` DECIMAL(10,2) NOT NULL,
+  `order_date` DATETIME NOT NULL,
+  `shipped_date` DATETIME NOT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `customers_customers_id` INT NOT NULL,
+  `products_product_id` INT NOT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_orders_customers1_idx` (`customers_customers_id` ASC) VISIBLE,
+  INDEX `fk_orders_products1_idx` (`products_product_id` ASC) VISIBLE,
   CONSTRAINT `fk_orders_customers1`
     FOREIGN KEY (`customers_customers_id`)
     REFERENCES `manufacturing`.`customers` (`customers_id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `manufacturing`.`orderDetails`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `manufacturing`.`orderDetails` (
-  `quantity_ordered` INT NOT NULL,
-  `price_each` DOUBLE NOT NULL,
-  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `products_product_id` INT NOT NULL,
-  `orders_order_id` INT NOT NULL,
-  INDEX `fk_orderDetails_products1_idx` (`products_product_id` ASC) VISIBLE,
-  INDEX `fk_orderDetails_orders1_idx` (`orders_order_id` ASC) VISIBLE,
-  CONSTRAINT `fk_orderDetails_products1`
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_orders_products1`
     FOREIGN KEY (`products_product_id`)
     REFERENCES `manufacturing`.`products` (`product_id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_orderDetails_orders1`
-    FOREIGN KEY (`orders_order_id`)
-    REFERENCES `manufacturing`.`orders` (`order_id`)
-    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
+
 
 
 -- -----------------------------------------------------
@@ -206,27 +195,27 @@ CREATE TABLE IF NOT EXISTS `manufacturing`.`customers_has_customerCar1` (
     ON UPDATE CASCADE,
   CONSTRAINT `fk_customers_has_customerCar1_customerCar1`
     FOREIGN KEY (`customerCar_customerCar_id`)
-    REFERENCES `manufacturing`.`customerCar` (`customerCar_id`)
+    REFERENCES `manufacturing`.`customerCars` (`customerCar_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `manufacturing`.`customerCar_has_products`
+-- Table `manufacturing`.`customerCars_has_products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCar_has_products` (
-  `customerCar_customerCar_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `manufacturing`.`customerCars_has_products` (
+  `customerCars_customerCar_id` INT NOT NULL,
   `products_product_id` INT NOT NULL,
-  PRIMARY KEY (`customerCar_customerCar_id`, `products_product_id`),
-  INDEX `fk_customerCar_has_products_products1_idx` (`products_product_id` ASC) VISIBLE,
-  INDEX `fk_customerCar_has_products_customerCar1_idx` (`customerCar_customerCar_id` ASC) VISIBLE,
-  CONSTRAINT `fk_customerCar_has_products_customerCar1`
-    FOREIGN KEY (`customerCar_customerCar_id`)
-    REFERENCES `manufacturing`.`customerCar` (`customerCar_id`)
+  PRIMARY KEY (`customerCars_customerCar_id`, `products_product_id`),
+  INDEX `fk_customerCars_has_products_products1_idx` (`products_product_id` ASC) VISIBLE,
+  INDEX `fk_customerCars_has_products_customerCars1_idx` (`customerCars_customerCar_id` ASC) VISIBLE,
+  CONSTRAINT `fk_customerCars_has_products_customerCars1`
+    FOREIGN KEY (`customerCars_customerCar_id`)
+    REFERENCES `manufacturing`.`customerCars` (`customerCar_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_customerCar_has_products_products1`
+  CONSTRAINT `fk_customerCars_has_products_products1`
     FOREIGN KEY (`products_product_id`)
     REFERENCES `manufacturing`.`products` (`product_id`)
     ON DELETE CASCADE

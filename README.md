@@ -62,3 +62,13 @@ Generate data to fill the database with that you can use in development
 * Make a simpler Python program where you can view, change and update the data in
 the database
 ---
+## run
+ pip3 install -U -r requirements.txt
+ 
+## run mysql and mongodb
+
+docker-compose -f docker-compose.yml -f docker-compose2.yml up -d
+
+## remove images
+docker-compose -f docker-compose.yml -f docker-compose2.yml down
+

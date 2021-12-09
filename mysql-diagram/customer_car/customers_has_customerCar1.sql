@@ -1,5 +1,4 @@
-
-INSERT INTO  customerCar_has_products (customerCar_customerCar_id, products_product_id) VALUES
+INSERT INTO customers_has_customerCar1 (customers_customers_id, customerCar_customerCar_id)  VALUES
 (1, 1),
 (2, 2),
 (3, 3),
@@ -49,3 +48,4 @@ INSERT INTO  customerCar_has_products (customerCar_customerCar_id, products_prod
 (48, 48),
 (49, 49),
 (50, 50);
+

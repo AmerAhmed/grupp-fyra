@@ -1,14 +1,16 @@
 services:
-
   db:
-    image: mysql
-    container_name: GruppFyra
+    container_name: mysql_container
     restart: always
+    image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: PASSWORD
+      MYSQL_ROOT_PASSWORD: Myservername
       MYSQL_DATABASE: manufacturing
     cap_add:
       - SYS_NICE
     ports:
       - 8080:8080
-
+    volumes:
+      - mysql_data_container:/var/lib/dbs
+volumes:
+  mysql_data_container:

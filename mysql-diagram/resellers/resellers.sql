@@ -1,5 +1,5 @@
 
-INSERT INTO reseller (reseller_name, address, contact_name, phone, email, manufacturer_manufacturer_id) VALUES
+INSERT INTO resellers (reseller_name, address, contact_name, phone, email, manufacturer_manufacturer_id) VALUES
 ('Topiclounge', '27 Northview Drive', 'Matelda Breazeall', '266-740-9056', 'mbreazeall0@washingtonpost.com', 1),
 ('Skippad', '5794 Arapahoe Road', 'Annelise Sweet', '934-587-5302', 'asweet1@imgur.com', 1),
 ('Tavu', '558 Dawn Hill', 'Rosabelle Cheake', '859-632-7855', 'rcheake2@census.gov', 1),

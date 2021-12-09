@@ -1,5 +1,5 @@
 import datetime
-from app.src.mysqldb import Base
+from app.src.dbs import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import DECIMAL, DateTime
 from sqlalchemy import ForeignKey
@@ -9,9 +9,9 @@ from sqlalchemy.orm import relationship
 class CustomersHasCustomerCar(Base):
     __tablename__ = 'customers_has_customerCar1'
 
-    customerCar_customerCar_id = Column(Integer, ForeignKey('customerCar.customerCar_id'), primary_key=True)
+    customerCar_customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
     customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
-    car = relationship('CustomerCar', back_populates='customers_cars')
+    car = relationship('CustomerCars', back_populates='customers_cars')
     owner_car = relationship('Customers', back_populates='customers_has_car')
 
     def __repr__(self):
@@ -19,12 +19,12 @@ class CustomersHasCustomerCar(Base):
 
 
 class CustomerCarHasProducts(Base):
-    __tablename__ = 'customerCar_has_products'
+    __tablename__ = 'customerCars_has_products'
 
     products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
-    customerCar_customerCar_id = Column(Integer, ForeignKey('customerCar.customerCar_id'), primary_key=True)
+    customerCars_customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
     product_has_products = relationship('Products', back_populates='product_has_cars')
-    customerCar_has_products = relationship('CustomerCar', back_populates='cars_has_products')
+    customerCar_has_products = relationship('CustomerCars', back_populates='cars_has_products')
 
     def __repr__(self):
         return f'{self.product_has_products} {self.customerCar_has_products}'
@@ -40,9 +40,9 @@ class Products(Base):
     product_description = Column(String(255), nullable=False)
     quantityin_stock = Column(Integer, nullable=False)
     buy_price = Column(DECIMAL(10, 2), nullable=False)
-    reseller_reseller_id = Column(Integer, ForeignKey('reseller.reseller_id'), primary_key=True)
-    reseller = relationship('Reseller', back_populates='products')
-    order_details = relationship('OrderDetails', back_populates='product_details')
+    resellers_reseller_id = Column(Integer, ForeignKey('resellers.reseller_id'), primary_key=True)
+    resellers = relationship('Resellers', back_populates='products')
+    orders = relationship('Orders', back_populates='product')
     product_has_cars = relationship('CustomerCarHasProducts', back_populates='product_has_products')
 
     def __repr__(self):
@@ -53,8 +53,6 @@ class Products(Base):
         ProductDescription: {self.product_description}
         QuantityInStock: {self.quantityin_stock}
         BuyPrice: {self.buy_price}
-        OrderDetails: {self.order_details}
-        product_has_cars: {self.product_has_cars}
         """
 
 
@@ -83,15 +81,13 @@ class Customers(Base):
         Email: {self.email} 
         City: {self.city}
         ZipCode: {self.zip_code} 
-        Country: {self.country}  
-        Ordered: {self.order}
-        Customers_has_customerCar: {self.customers_has_car}
-
+        Country: {self.country} 
+        Customers_has_car: {self.customers_has_car} 
         """
 
 
-class CustomerCar(Base):
-    __tablename__ = 'customerCar'
+class CustomerCars(Base):
+    __tablename__ = 'customerCars'
 
     customerCar_id = Column(Integer, primary_key=True, autoincrement=True)
     reg_number = Column(String(7), nullable=False)
@@ -128,12 +124,13 @@ class Offices(Base):
 
     def __repr__(self):
         return f"""
-        ************
-        OfficesInfo:
-        ************
-        {self.offices_code} {self.offices_name} {self.address} {self.phone}
-        {self.employee_name} {self.employee_phone} {self.employee_email}\t\n
-        EmployeeInfo: {self.employee}
+        OfficesID: {self.offices_id}
+        {self.offices_code} 
+        {self.offices_name} 
+        {self.address} {self.phone}
+        {self.employee_name} 
+        {self.employee_phone} 
+        {self.employee_email}
         """
 
 
@@ -155,8 +152,7 @@ class Employees(Base):
         EmployeeFirstName: {self.first_name} 
         EmployeeLastName: {self.last_name} 
         EmployeeEmail: {self.email} 
-        EmployeePhone: {self.phone}\n\n
-        CustomersInfo: {self.customers}
+        EmployeePhone: {self.phone}
         """
 
 
@@ -164,46 +160,31 @@ class Orders(Base):
     __tablename__ = 'orders'
 
     order_id = Column(Integer, primary_key=True, autoincrement=True)
+    quantity_ordered = Column(Integer)
+    price_each = Column(DECIMAL(10, 2))
     order_date = Column(DateTime, default=datetime.datetime.utcnow)
     shipped_date = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
+    product = relationship('Products', back_populates='orders')
     customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
     customer = relationship('Customers', back_populates='order')
-    orders = relationship('OrderDetails', back_populates='order')
 
     def __repr__(self):
         return f"""
-               **********
-               OrderInfo:
-               **********
+               OrderId: {self.order_id}
+               quantityOrdered: {self.quantity_ordered}
+               PriceEach: {self.price_each}
                OrderDate: {self.order_date} 
-               ShippedDate: {self.shipped_date}
-               OrderDetails: {self.orders}
+               ShippedDate: {self.shipped_date} 
+               Created_at: {self.created_at}
+               ProductId: {self.products_product_id}
+               {self.customer}
                """
 
 
-class OrderDetails(Base):
-    __tablename__ = 'orderDetails'
-
-    quantity_ordered = Column(Integer)
-    price_each = Column(DECIMAL(10, 2))
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    orders_order_id = Column(Integer, ForeignKey('orders.order_id'), primary_key=True)
-    products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
-    order = relationship('Orders', back_populates='orders')
-    product_details = relationship('Products', back_populates='order_details')
-
-    def __repr__(self):
-        return f"""
-        QuantityOredered: {self.quantity_ordered}
-        PriceEach: {self.price_each}
-        Created_at: {self.created_at}
-        Ordered: {self.order}
-        ProductDetails: {self.product_details}
-        """
-
-
-class Reseller(Base):
-    __tablename__ = 'reseller'
+class Resellers(Base):
+    __tablename__ = 'resellers'
 
     reseller_id = Column(Integer, primary_key=True, autoincrement=True)
     reseller_name = Column(String(100), nullable=False)
@@ -213,16 +194,16 @@ class Reseller(Base):
     email = Column(String(100), nullable=False)
     manufacturer_manufacturer_id = Column(Integer, ForeignKey('manufacturer.manufacturer_id'), primary_key=True)
     manufacturer = relationship('Manufacturer', back_populates='resellers')
-    products = relationship('Products', back_populates='reseller')
+    products = relationship('Products', back_populates='resellers')
 
     def __repr__(self):
         return f"""
+            ResellerID: {self.reseller_id}
             ResellerName: {self.reseller_name}
             ResellerAddress: {self.address}
             ResellerContactName: {self.contact_name}
             ResellerPhone: {self.phone} 
             ResellerEmail: {self.email}
-            ProductsInfo: {self.products}
             """
 
 
@@ -238,7 +219,7 @@ class Manufacturer(Base):
     city = Column(String(100), nullable=False)
     country = Column(String(100), nullable=False)
     zip_code = Column(String(100), nullable=False)
-    resellers = relationship('Reseller', back_populates='manufacturer')
+    reseller = relationship('Resellers', back_populates='manufacturer')
 
     def __repr__(self):
         return f"""
@@ -253,5 +234,4 @@ class Manufacturer(Base):
                {self.city}
                {self.country}
                {self.zip_code}
-               {self.resellers}
                """
