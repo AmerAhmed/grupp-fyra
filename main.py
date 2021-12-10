@@ -1,4 +1,4 @@
-# from app.controllers.controllers import get_ordered, get_resellers
+from app.controllers.controllers import get_ordered, get_resellers
 # from app.controllers.controllers import get_manufacturing, get_customer_cars
 # from app.controllers.controllers import get_offices
 # from app.controllers.controllers import get_employees, get_customers
@@ -44,7 +44,7 @@ def main():
     # get_products()
 
     # get_ordered()
-    # get_resellers()
+    get_resellers()
 
 
 if __name__ == '__main__':
