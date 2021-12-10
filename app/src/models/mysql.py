@@ -1,5 +1,5 @@
 import datetime
-from app.src.dbs import Base
+from app.src.db import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import DECIMAL, DateTime
 from sqlalchemy import ForeignKey
@@ -219,7 +219,7 @@ class Manufacturer(Base):
     city = Column(String(100), nullable=False)
     country = Column(String(100), nullable=False)
     zip_code = Column(String(100), nullable=False)
-    reseller = relationship('Resellers', back_populates='manufacturer')
+    resellers = relationship('Resellers', back_populates='manufacturer')
 
     def __repr__(self):
         return f"""

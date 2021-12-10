@@ -11,6 +11,6 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - mysql_data_container:/var/lib/dbs
+      - mysql_data_container:/var/lib/db
 volumes:
   mysql_data_container:

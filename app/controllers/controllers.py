@@ -1,4 +1,4 @@
-from app.src.dbs import session
+from app.src.db import session
 from app.src.models.mysql import Customers, Orders, Products, CustomerCars, Resellers
 from app.src.models.mysql import Manufacturer, Offices, Employees
 
