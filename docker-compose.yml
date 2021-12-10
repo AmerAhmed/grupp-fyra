@@ -4,8 +4,8 @@ services:
     restart: always
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: PASSWORD
-      MYSQL_DATABASE: DATABASES
+      MYSQL_ROOT_PASSWORD: ${PASSWORD}
+      MYSQL_DATABASE: ${DATABASES}
     cap_add:
       - SYS_NICE
     ports:

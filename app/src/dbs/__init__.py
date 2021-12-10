@@ -1,3 +1,3 @@
-
+from app.config.settings import *
 from mongoengine import connect
-connect(db='companies', username="company", password="myservices", authentication_source="companies")
+connect(f"{ONGODB_DATABASE} {ONGODB_USENAME} {ONGODB_PASSWORD}", authentication_source="companies")
