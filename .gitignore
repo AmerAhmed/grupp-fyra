@@ -13,6 +13,7 @@ Icon
 
 # config file
 app/config/settings.py
+app/src/dbs/*
 
 
 # Thumbnails
