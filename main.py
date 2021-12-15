@@ -1,17 +1,18 @@
-from app.controllers.controllers import get_orders, get_resellers
-from app.controllers.controllers import get_manufacturing
-from app.controllers.controllers import get_offices, get_customer_cars
-from app.controllers.controllers import get_employees, get_customers
-from app.controllers.controllers import get_products
-from app.src.models.models import Customers
-from app.src.db import session
+from mongoengine import connect
+from app.controllers.controllers import fetch_customers, fetch_products
+from app.controllers.controllers import fetch_orders, fetch_cars
+from app.controllers.controllers import fetch_offices, fetch_suppliers
+from app.controllers.controllers import fetch_employees, fetch_manufacturers
+
+connect(db='companies', username='company', password='myservices', authentication_source='companies')
 
 
 def main():
     print('*' * 45)
-    print('Welcome to Relational Database in MySQL!')
+    print('Welcome to Object-Document Mapping in MongoDB!')
     print('*' * 45)
 
+<<<<<<< HEAD
     # get_customers()
 
     """
@@ -46,6 +47,23 @@ def main():
     # get_resellers()
     # get_orders()
 
+=======
+    # fetch_customers()
+
+    # fetch_products()
+
+    # fetch_orders()
+
+    # fetch_cars()
+
+    # fetch_employees()
+
+    # fetch_offices()
+
+    # fetch_suppliers()
+
+    fetch_manufacturers()
+>>>>>>> main
     print('*' * 45)
 
 
