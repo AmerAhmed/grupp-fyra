@@ -47,6 +47,7 @@ class Products(Base):
 
     def __repr__(self):
         return f"""
+        ProductsID:  {self.product_id}
         ProductName: {self.product_name}
         ProductNumber: {self.product_number}
         ProductVendor: {self.product_vendor}
@@ -75,6 +76,7 @@ class Customers(Base):
 
     def __repr__(self):
         return f"""
+        CustomersID: {self.customers_id}
         Fullname: {self.first_name} {self.last_name}
         Address: {self.address}
         Phone: {self.phone}
@@ -125,12 +127,13 @@ class Offices(Base):
     def __repr__(self):
         return f"""
         OfficesID: {self.offices_id}
-        {self.offices_code} 
-        {self.offices_name} 
-        {self.address} {self.phone}
-        {self.employee_name} 
-        {self.employee_phone} 
-        {self.employee_email}
+        OfficesCode: {self.offices_code} 
+        OfficesName: {self.offices_name} 
+        Addresses: {self.address} 
+        Phone: {self.phone}
+        EmployeesName: {self.employee_name} 
+        EmployeesPhone: {self.employee_phone} 
+        EmployeesEmail: {self.employee_email}
         """
 
 
@@ -172,7 +175,7 @@ class Orders(Base):
 
     def __repr__(self):
         return f"""
-               OrderId: {self.order_id}
+               OrdersID: {self.order_id}
                quantityOrdered: {self.quantity_ordered}
                PriceEach: {self.price_each}
                OrderDate: {self.order_date} 
@@ -226,12 +229,9 @@ class Manufacturer(Base):
                ******************
                ManufacturingInfo:
                ******************
-               {self.manufacturer_name}
-               {self.address}
-               {self.contact_name}
-               {self.phone} 
-               {self.email} 
-               {self.city}
-               {self.country}
-               {self.zip_code}
+               ManufacturingID: {self. manufacturer_id}
+               {self.manufacturer_name} {self.address}
+               {self.contact_name} {self.phone} 
+               {self.email} {self.city}
+               {self.country} {self.zip_code}
                """
