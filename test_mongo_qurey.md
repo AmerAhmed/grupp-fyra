@@ -2,10 +2,10 @@
 for customer in Customers.objects.order_by('-first_name', '-last_name'):
        print(f'FirstName: {customer.first_name}\t\nLastName: {customer.last_name}')
 # UPDATED
-Customers.objects(first_name='John').update(last_name='Andersson')
+Customers.objects(first_name='John').update(age='Andersson')
     
 # DELETE
-Customers.objects(name='Amer').delete()
+Customers.objects(first_name='Amer').delete()
 
 # GET USER EMAIL
 cust = Customers.objects.get(first_name='Amer')

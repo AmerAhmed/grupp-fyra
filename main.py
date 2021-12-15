@@ -1,11 +1,10 @@
-
 from app.controllers.controllers import get_orders, get_resellers
 from app.controllers.controllers import get_manufacturing
 from app.controllers.controllers import get_offices, get_customer_cars
 from app.controllers.controllers import get_employees, get_customers
 from app.controllers.controllers import get_products
-from app.src.db import session
 from app.src.models.models import Customers
+from app.src.db import session
 
 
 def main():
@@ -13,8 +12,9 @@ def main():
     print('Welcome to Relational Database in MySQL!')
     print('*' * 45)
 
+    """"
     get_customers()
-    """
+
     customers1 = session.query(Customers).filter(Customers.customers_id == 1).first()
     customers2 = session.query(Customers).filter(Customers.customers_id == 2).first()
     
@@ -26,7 +26,7 @@ def main():
     session.add(customers2)
     session.commit()
     
-    get_customers()
+    # get_customers()
 
     # Create a new person
     customer = Customers(first_name='Amer', last_name='Ahmed',
@@ -36,15 +36,14 @@ def main():
     session.add(customer)
     session.commit()
     get_customers()
-
     get_offices()
     get_employees()
-    get_customers()
     get_customer_cars()
     get_manufacturing()
     get_products()
     get_orders()
     get_resellers()
+    get_orders()
     """
     print('*' * 45)
 

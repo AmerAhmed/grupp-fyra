@@ -21,7 +21,7 @@ def fetch_products():
     for product in Products.objects:
         print(f"""
             ProductName: {product.prod_name} 
-            ProductName: {product.prod_number} 
+            ProductNumber: {product.prod_number} 
             ProdVendor: {product.prod_vendor}  
             quantityInStock: {product.quantityin_stock} 
             BuyPrice: {product.buy_price}  
