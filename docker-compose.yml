@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+services:
+  mysql:
+    container_name: mysql_container
+    restart: always
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Myservername
+      MYSQL_DATABASE: manufacturing
+    cap_add:
+      - SYS_NICE
+    ports:
+      - 8080:8080
+    volumes:
+      - "./dumps/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+=======
   mongo:
       image: mongo
       container_name: mongo_container
@@ -8,3 +24,4 @@
         MONGO_INITDB_ROOT_DATABASE: companies
       ports:
         - 27017:27017
+>>>>>>> main
