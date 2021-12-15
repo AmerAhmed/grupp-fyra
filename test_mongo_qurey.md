@@ -37,7 +37,7 @@ customer.save()
 
 # INSERT MANY
 Customers.objects.insert(
-[Customers(first_name='Anders', last_name='Larsson',
+[Customers(first_name='Anders', last_name='Anderrson',
             email='anders@gmail.com',
             phone='070-559-1204',
             address='Washington S',
