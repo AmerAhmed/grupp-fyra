@@ -11,16 +11,18 @@ def app():
     print('Welcome to Object-Document Mapping in MongoDB!')
     print('*' * 45)
 
-    # fetch_customers()
-    # fetch_products()
-    # fetch_orders()
-    # fetch_cars()
+    """
+    fetch_customers()
+    fetch_products()
+    fetch_orders()
+    fetch_cars()
 
-    # fetch_employees()
-    # fetch_offices()
-    # fetch_suppliers()
+    fetch_employees()
+    fetch_offices()
+    fetch_suppliers()
     fetch_manufacturers()
     print('*' * 45)
+    """
 
 
 if __name__ == '__main__':
