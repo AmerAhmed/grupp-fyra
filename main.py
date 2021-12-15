@@ -12,9 +12,9 @@ def main():
     print('Welcome to Relational Database in MySQL!')
     print('*' * 45)
 
-    """"
-    get_customers()
+    # get_customers()
 
+    """
     customers1 = session.query(Customers).filter(Customers.customers_id == 1).first()
     customers2 = session.query(Customers).filter(Customers.customers_id == 2).first()
     
@@ -36,15 +36,16 @@ def main():
     session.add(customer)
     session.commit()
     get_customers()
-    get_offices()
-    get_employees()
-    get_customer_cars()
-    get_manufacturing()
-    get_products()
-    get_orders()
-    get_resellers()
-    get_orders()
     """
+    # get_offices()
+    # get_employees()
+    # get_customer_cars()
+    # get_manufacturing()
+    # get_products()
+    # get_orders()
+    # get_resellers()
+    # get_orders()
+
     print('*' * 45)
 
 

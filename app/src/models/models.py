@@ -102,7 +102,6 @@ class CustomerCars(Base):
 
     def __repr__(self):
         return f"""
-        CustomerCarID: {self.customerCar_id}
         RegisterNumber: {self.reg_number}
         CarBrand: {self.brand}
         CarModel: {self.model}
@@ -204,9 +203,10 @@ class Resellers(Base):
             ResellerID: {self.reseller_id}
             ResellerName: {self.reseller_name}
             ResellerAddress: {self.address}
-            ResellerContactName: {self.contact_name}
+            ResellerContactPerson: {self.contact_name}
             ResellerPhone: {self.phone} 
             ResellerEmail: {self.email}
+            Products: {self.products}
             """
 
 
@@ -234,4 +234,5 @@ class Manufacturer(Base):
                {self.contact_name} {self.phone} 
                {self.email} {self.city}
                {self.country} {self.zip_code}
+               resellers: {self.resellers}
                """

@@ -10,14 +10,5 @@ services:
       - SYS_NICE
     ports:
       - 8080:8080
-
-  mongo:
-      image: mongo
-      container_name: mongo_container
-      restart: always
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: company
-        MONGO_INITDB_ROOT_PASSWORD: myservices
-        MONGO_INITDB_ROOT_DATABASE: companies
-      ports:
-        - 27017:27017
+    volumes:
+      - "./dumps/schema.sql:/docker-entrypoint-initdb.d/1.sql"
