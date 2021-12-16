@@ -1,32 +1,29 @@
-from mongoengine import connect
-from app.controllers.controllers import fetch_customers, fetch_products
-from app.controllers.controllers import fetch_orders, fetch_cars
-from app.controllers.controllers import fetch_offices, fetch_suppliers
-from app.controllers.controllers import fetch_employees, fetch_manufacturers
+from app.controllers.controllers import get_orders, get_resellers
+from app.controllers.controllers import get_manufacturing
+from app.controllers.controllers import get_offices, get_customer_cars
+from app.controllers.controllers import get_employees, get_customers
+from app.controllers.controllers import get_products
+from app.source.models.mysql_model import Customers
+from app.source.db import session
 
-connect(db='companies', username='company', password='myservices', authentication_source='companies')
 
-
-def main():
+def mysql_main():
     print('*' * 45)
-    print('Welcome to Object-Document Mapping in MongoDB!')
+    print('Welcome to Relational Database in MySQL!')
     print('*' * 45)
-
-<<<<<<< HEAD
     # get_customers()
-
     """
     customers1 = session.query(Customers).filter(Customers.customers_id == 1).first()
     customers2 = session.query(Customers).filter(Customers.customers_id == 2).first()
-    
+
     car = customers1.customers_has_car[0]
     customers1.customers_has_car.remove(car)  # Removed car from id 1
     customers2.customers_has_car.append(car)  # Added car to id 2
-        
+
     session.add(customers1)
     session.add(customers2)
     session.commit()
-    
+
     # get_customers()
 
     # Create a new person
@@ -38,7 +35,7 @@ def main():
     session.commit()
     get_customers()
     """
-    # get_offices()
+    get_offices()
     # get_employees()
     # get_customer_cars()
     # get_manufacturing()
@@ -47,25 +44,8 @@ def main():
     # get_resellers()
     # get_orders()
 
-=======
-    # fetch_customers()
-
-    # fetch_products()
-
-    # fetch_orders()
-
-    # fetch_cars()
-
-    # fetch_employees()
-
-    # fetch_offices()
-
-    # fetch_suppliers()
-
-    fetch_manufacturers()
->>>>>>> main
     print('*' * 45)
 
 
 if __name__ == '__main__':
-    main()
+    mysql_main()

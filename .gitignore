@@ -17,7 +17,7 @@ app/config/settings.py
 =======
 app/featura/config/settings.py
 >>>>>>> main
-app/src/dbs/*
+app/source/dbs/*
 
 
 # Thumbnails
