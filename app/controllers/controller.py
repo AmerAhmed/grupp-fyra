@@ -1,17 +1,24 @@
 """
+<<<<<<< HEAD
 The main entry point for Object-Document Mapping in MongoDB!
 Amer Ahmed
 Alexander Amaechi
 Elvir Velagic
 Abshir Mohamed
+=======
+The main entry point for Relational Database in MySQL!
+Amer Ahmed
+Alexander Amaechi
+Abshir Mohamed
+Elvir Velagic
 Supervisor: Joakim Wassberg
 Version 0.0.1
 """
 
-from app.src.models.models import Customers, Cars
-from app.src.models.models import Orders, Products
-from app.src.models.models import Employees, Offices
-from app.src.models.models import Manufacturers, Suppliers
+from app.src.models.model import Customers, Cars
+from app.src.models.model import Orders, Products
+from app.src.models.model import Employees, Offices
+from app.src.models.model import Manufacturers, Suppliers
 
 
 def fetch_customers():
