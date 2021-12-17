@@ -33,7 +33,6 @@ For manufacturers, it must be stated
 * name of contact person
 * telephone number of contact person
 * email to the contact person
----
 
 A product is delivered by one or more suppliers. It must be stated which products this supplier can deliver.
 For supplier must be stated
@@ -42,7 +41,6 @@ For supplier must be stated
 * contact person 
 * telephone
 * email
----
 
 The system should keep track of customers and orders (similar to those found in the sample database from mysqltutorial (http://www.mysqltutorial.org/mysql-sample-database.aspx). A customer can be either an individual or a company. is a corporate customer, the contact person at the company must have contact information.
 Some that contain staff must also be included, because we want to be able to see which staff the customer bought from, and in which store the staff works. Of course, it must also be stated in which store a certain purchase has been made and the date and time of the purchase.
@@ -64,7 +62,6 @@ Generate data to fill the database with that you can use in development
 * Make a dump of the database and version it with the rest of your project
 * Make a simpler Python program where you can view, change and update the data in
 the database
----
 
 
 
