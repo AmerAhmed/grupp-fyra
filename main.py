@@ -48,7 +48,7 @@ def main():
     # get_customers()
     # get_offices()
     # get_employees()
-    #  get_cars()
+    # get_cars()
     # get_manufacturing()
     # get_products()
     # get_orders()
