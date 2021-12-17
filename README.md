@@ -51,7 +51,6 @@ For customers, information about their cars must also be stored, ie
 * year model
 * color
 
----
 A customer can have several cars. Steps to take:
 * Model a database design in MySQL
 * Generate the database automatically from the model. Make sure even strangers

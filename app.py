@@ -1,5 +1,5 @@
 """
-The main entry point for Relational Database in MySQL!
+The main entry point for Object-Document Mapping in MongoDB!
 Amer Ahmed
 Alexander Amaechi
 Elvir Velagic
@@ -8,10 +8,10 @@ Supervisor: Joakim Wassberg
 Version 0.0.1
 """
 
-from app.controllers.controller import fetch_customers, fetch_products
-from app.controllers.controller import fetch_orders, fetch_cars
-from app.controllers.controller import fetch_offices, fetch_suppliers
-from app.controllers.controller import fetch_employees, fetch_manufacturers
+from app.controllers.controllers import fetch_customers, fetch_products
+from app.controllers.controllers import fetch_orders, fetch_cars
+from app.controllers.controllers import fetch_offices, fetch_suppliers
+from app.controllers.controllers import fetch_employees, fetch_manufacturers
 
 from mongoengine import connect
 connect(db='companies', username='company', password='myservices', authentication_source='companies')
