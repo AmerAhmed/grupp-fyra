@@ -52,7 +52,7 @@ def main():
     # get_manufacturing()
     # get_products()
     # get_orders()
-    # get_resellers()
+    get_resellers()
     # get_orders()
 
 

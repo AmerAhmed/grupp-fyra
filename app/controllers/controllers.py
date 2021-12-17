@@ -15,7 +15,6 @@ from app.src.models.models import Employees, Manufacturer, Offices
 
 
 def get_manufacturing():
-    """
     manufacturers = session.query(Manufacturer).all()
     for manufacturer in manufacturers:
         print('*' * 40)
@@ -23,6 +22,7 @@ def get_manufacturing():
     """
     manufacturers = session.query(Manufacturer).filter(Manufacturer.manufacturer_id == 2).first()
     print(manufacturers)
+    """
 
 
 def get_products():
@@ -71,7 +71,6 @@ def get_orders():
 
 
 def get_offices():
-    """
     offices = session.query(Offices).all()
     for office in offices:
         print('*' * 40)
@@ -80,10 +79,10 @@ def get_offices():
 
     offices = session.query(Offices).filter(Offices.offices_id == 51).first()
     print(offices)
+    """
 
 
 def get_employees():
-    """
     employees = session.query(Employees).all()
     for employee in employees:
         print('*' * 40)
@@ -91,15 +90,15 @@ def get_employees():
     """
     employee = session.query(Employees).filter(Employees.employee_id == 51).first()
     print(employee)
+    """
 
 
 def get_resellers():
-    """
     resellers = session.query(Resellers).all()
     for resellers in resellers:
         print('*' * 40)
         print(resellers)
     """
-
     resellers = session.query(Resellers).filter(Resellers.reseller_id == 51).first()
     print(resellers)
+    """

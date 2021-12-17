@@ -1,6 +1,5 @@
 """
 The main entry point Object-Document Mapping in MongoDB!
-The main entry point for Object-Document Mapping in MongoDB!
 Amer Ahmed
 Alexander Amaechi
 Elvir Velagic

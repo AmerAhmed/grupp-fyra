@@ -254,4 +254,5 @@ class Manufacturer(Base):
                City: {self.city}
                ZipCode: {self.country} 
                Country: {self.zip_code}
+               {self.resellers}
                """
