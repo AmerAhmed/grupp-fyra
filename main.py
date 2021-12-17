@@ -13,7 +13,7 @@ from app.controllers.controllers import get_manufacturing
 from app.controllers.controllers import get_offices, get_cars
 from app.controllers.controllers import get_employees, get_customers
 from app.controllers.controllers import get_products
-from app.src.models.models_s import Customers
+from app.src.models.models import Customers
 from app.src.db import session
 
 

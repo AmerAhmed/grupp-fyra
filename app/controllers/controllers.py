@@ -9,9 +9,9 @@ Version 0.0.1
 """
 
 from app.src.db import session
-from app.src.models.models_s import Products, CustomerCars
-from app.src.models.models_s import Customers, Orders, Resellers
-from app.src.models.models_s import Employees, Manufacturer, Offices
+from app.src.models.models import Products, CustomerCars
+from app.src.models.models import Customers, Orders, Resellers
+from app.src.models.models import Employees, Manufacturer, Offices
 
 
 def get_manufacturing():
