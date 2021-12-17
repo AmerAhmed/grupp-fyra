@@ -1,3 +1,13 @@
+"""
+The main entry point for Relational Database in MySQL!
+Amer Ahmed
+Alexander Amaechi
+Elvir Velagic
+Abshir Mohamed
+Supervisor: Joakim Wassberg
+Version 0.0.1
+"""
+
 import datetime
 from mongoengine import EmailField, DecimalField, Document
 from mongoengine import StringField, IntField, DateTimeField
