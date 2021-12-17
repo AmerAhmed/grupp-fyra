@@ -1,10 +1,10 @@
 # Project assignment Relationship databases
 
-You will work in groups and your task is as follows:
+You will work in groups and your task is as follows.
 Create a database to be used by a company that sells spare parts for cars. 
 This database is primarily intended for use by employees at the company, 
 but in the future you also want to be able to link an online shop to this database.
-The following requirements have emerged in a meeting with the customer:
+The following requirements have emerged in a meeting with the customer.
 
 ## The core of the company's business is spare parts for cars. A spare part has
 * a name
@@ -33,7 +33,7 @@ For manufacturers, it must be stated
 * name of contact person
 * telephone number of contact person
 * email to the contact person
----
+mongo-development
 
 A product is delivered by one or more suppliers. It must be stated which products this supplier can deliver.
 For supplier must be stated
@@ -42,7 +42,7 @@ For supplier must be stated
 * contact person 
 * telephone
 * email
----
+
 The system should keep track of customers and orders (similar to those found in the sample database from mysqltutorial (http://www.mysqltutorial.org/mysql-sample-database.aspx). A customer can be either an individual or a company. is a corporate customer, the contact person at the company must have contact information.
 Some that contain staff must also be included, because we want to be able to see which staff the customer bought from, and in which store the staff works. Of course, it must also be stated in which store a certain purchase has been made and the date and time of the purchase.
 For customers, information about their cars must also be stored, ie
@@ -51,7 +51,6 @@ For customers, information about their cars must also be stored, ie
 * model
 * year model
 * color
----
 
 A customer can have several cars. Steps to take:
 * Model a database design in MySQL
@@ -63,6 +62,7 @@ Generate data to fill the database with that you can use in development
 * Make a dump of the database and version it with the rest of your project
 * Make a simpler Python program where you can view, change and update the data in
 the database
+mongo-development
 
 
 
