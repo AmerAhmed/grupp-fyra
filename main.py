@@ -1,3 +1,13 @@
+"""
+The main entry point for Relational Database in MySQL!
+Amer Ahmed
+Alexander Amaechi
+Abshir Mohamed
+Elvir Velagic
+Supervisor: Joakim Wassberg
+Version 0.0.1
+"""
+
 from app.controllers.controllers import get_orders, get_resellers
 from app.controllers.controllers import get_manufacturing
 from app.controllers.controllers import get_offices, get_cars

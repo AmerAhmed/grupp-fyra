@@ -33,6 +33,7 @@ For manufacturers, it must be stated
 * name of contact person
 * telephone number of contact person
 * email to the contact person
+mongo-development
 
 A product is delivered by one or more suppliers. It must be stated which products this supplier can deliver.
 For supplier must be stated
@@ -51,7 +52,6 @@ For customers, information about their cars must also be stored, ie
 * year model
 * color
 
----
 A customer can have several cars. Steps to take:
 * Model a database design in MySQL
 * Generate the database automatically from the model. Make sure even strangers
@@ -62,8 +62,7 @@ Generate data to fill the database with that you can use in development
 * Make a dump of the database and version it with the rest of your project
 * Make a simpler Python program where you can view, change and update the data in
 the database
-
-
+mongo-development
 
 
 
