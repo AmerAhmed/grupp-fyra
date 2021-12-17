@@ -1,5 +1,9 @@
 """
+<<<<<<< HEAD:app/src/models/models_m.py
 The main entry point Object-Document Mapping in MongoDB!
+=======
+The main entry point for Object-Document Mapping in MongoDB!
+>>>>>>> mongo-development:app/src/models/model.py
 Amer Ahmed
 Alexander Amaechi
 Elvir Velagic
