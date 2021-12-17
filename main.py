@@ -1,9 +1,19 @@
+"""
+The main entry point for Relational Database in MySQL!
+Amer Ahmed
+Alexander Amaechi
+Abshir Mohamed
+Elvir Velagic
+Supervisor: Joakim Wassberg
+Version 0.0.1
+"""
+
 from app.controllers.controllers import get_orders, get_resellers
 from app.controllers.controllers import get_manufacturing
 from app.controllers.controllers import get_offices, get_cars
 from app.controllers.controllers import get_employees, get_customers
 from app.controllers.controllers import get_products
-from app.src.models.models_s import Customers
+from app.src.models.models import Customers
 from app.src.db import session
 
 
@@ -38,7 +48,7 @@ def main():
     # get_customers()
     # get_offices()
     # get_employees()
-    #  get_cars()
+    # get_cars()
     # get_manufacturing()
     # get_products()
     # get_orders()

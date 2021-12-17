@@ -1,3 +1,12 @@
+
+-- The main entry point for Relational Database in MySQL!
+-- Amer Ahmed
+--  Amaechi
+-- Abshir Mohamed
+-- Elvir Velagic
+-- Supervisor: Joakim Wassberg
+-- Version 0.0.1
+
 -- MySQL dump 10.13  Distrib 8.0.12, for macos10.13 (x86_64)
 --
 -- Host: 127.0.0.1    Database: manufacturing

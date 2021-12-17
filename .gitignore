@@ -12,11 +12,8 @@
 Icon
 
 # configs file
-<<<<<<< HEAD
 app/config/settings.py
-=======
 app/featura/config/settings.py
->>>>>>> main
 app/src/dbs/*
 
 

@@ -1,7 +1,17 @@
+"""
+The main entry point for Relational Database in MySQL!
+Amer Ahmed
+Alexander Amaechi
+Abshir Mohamed
+Elvir Velagic
+Supervisor: Joakim Wassberg
+Version 0.0.1
+"""
+
 from app.src.db import session
-from app.src.models.models_s import Products, CustomerCars
-from app.src.models.models_s import Customers, Orders, Resellers
-from app.src.models.models_s import Employees, Manufacturer, Offices
+from app.src.models.models import Products, CustomerCars
+from app.src.models.models import Customers, Orders, Resellers
+from app.src.models.models import Employees, Manufacturer, Offices
 
 
 def get_manufacturing():
@@ -38,6 +48,7 @@ def get_cars():
 
 
 def get_customers():
+    """"
     customers = session.query(Customers).all()
     for customer in customers:
         print(customer)
@@ -45,7 +56,6 @@ def get_customers():
     """
     customers = session.query(Customers).filter(Customers.customers_id == 70).first()
     print(customers)
-    """
 
 
 def get_orders():
