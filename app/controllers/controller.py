@@ -1,12 +1,5 @@
 """
-<<<<<<< HEAD
 The main entry point for Object-Document Mapping in MongoDB!
-Amer Ahmed
-Alexander Amaechi
-Elvir Velagic
-Abshir Mohamed
-=======
-The main entry point for Relational Database in MySQL!
 Amer Ahmed
 Alexander Amaechi
 Abshir Mohamed
