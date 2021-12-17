@@ -1,5 +1,5 @@
 import datetime
-from app.source.db import Base
+from app.src.db import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import DECIMAL, DateTime
 from sqlalchemy import ForeignKey
@@ -7,24 +7,24 @@ from sqlalchemy.orm import relationship
 
 
 class CustomersHasCustomerCar(Base):
-    __tablename__ = 'customers_has_customerCar1'
+    __tablename__ = 'customers_has_customerCars1'
 
-    customerCar_customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
+    customerCars_customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
     customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
     car = relationship('CustomerCars', back_populates='customers_cars')
     owner_car = relationship('Customers', back_populates='customers_has_car')
 
     def __repr__(self):
-        return f'{self.car} {self.owner_car}'
+        return f'{self.car}'
 
 
 class CustomerCarHasProducts(Base):
     __tablename__ = 'customerCars_has_products'
 
-    products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
-    customerCars_customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
+    product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
+    customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
     product_has_products = relationship('Products', back_populates='product_has_cars')
-    customerCar_has_products = relationship('CustomerCars', back_populates='cars_has_products')
+    rel_Car_has_products = relationship('CustomerCars', back_populates='customerCars_has_products')
 
     def __repr__(self):
         return f'{self.product_has_products} {self.customerCar_has_products}'
@@ -98,10 +98,11 @@ class CustomerCars(Base):
     color = Column(String(50), nullable=False)
     years = Column(DateTime, default=datetime.datetime.utcnow)
     customers_cars = relationship('CustomersHasCustomerCar', back_populates='car')
-    cars_has_products = relationship('CustomerCarHasProducts',  back_populates='customerCar_has_products')
+    customerCars_has_products = relationship('CustomerCarHasProducts',  back_populates='rel_Car_has_products')
 
     def __repr__(self):
         return f"""
+        CustomerCarDI: {self.customerCar_id}
         RegisterNumber: {self.reg_number}
         CarBrand: {self.brand}
         CarModel: {self.model}
@@ -133,6 +134,8 @@ class Offices(Base):
         EmployeesName: {self.employee_name} 
         EmployeesPhone: {self.employee_phone} 
         EmployeesEmail: {self.employee_email}
+        ********************************
+        EmployeesInfo: {self.employee}
         """
 
 
@@ -151,10 +154,12 @@ class Employees(Base):
     def __repr__(self):
         return f"""
         EmployeeID: {self.employee_id}
-        EmployeeFirstName: {self.first_name} 
-        EmployeeLastName: {self.last_name} 
-        EmployeeEmail: {self.email} 
-        EmployeePhone: {self.phone}
+        FirstName: {self.first_name} 
+        LastName: {self.last_name} 
+        Email: {self.email} 
+        Phone: {self.phone}
+        ********************************
+        CustomerDetails: {self.customers}
         """
 
 
@@ -174,13 +179,15 @@ class Orders(Base):
 
     def __repr__(self):
         return f"""
+               *************
+               OrderDetails:
+               *************
                OrdersID: {self.order_id}
                quantityOrdered: {self.quantity_ordered}
                PriceEach: {self.price_each}
                OrderDate: {self.order_date} 
                ShippedDate: {self.shipped_date} 
                Created_at: {self.created_at}
-               ProductId: {self.products_product_id}
                {self.customer}
                """
 
@@ -201,12 +208,11 @@ class Resellers(Base):
     def __repr__(self):
         return f"""
             ResellerID: {self.reseller_id}
-            ResellerName: {self.reseller_name}
-            ResellerAddress: {self.address}
-            ResellerContactPerson: {self.contact_name}
-            ResellerPhone: {self.phone} 
-            ResellerEmail: {self.email}
-            Products: {self.products}
+            Name: {self.reseller_name}
+            Address: {self.address}
+            ContactPerson: {self.contact_name}
+            Phone: {self.phone} 
+            Email: {self.email}
             """
 
 
@@ -230,8 +236,12 @@ class Manufacturer(Base):
                ManufacturingInfo:
                ******************
                ManufacturingID: {self. manufacturer_id}
-               {self.manufacturer_name} {self.address}
-               {self.contact_name} {self.phone} 
-               {self.email} {self.city}
-               {self.country} {self.zip_code}
-               resellers: {self.resellers}"""
+               Name: {self.manufacturer_name}
+               Address: {self.address}
+               ContactPerson: {self.contact_name} 
+               Phone: {self.phone} 
+               Email: {self.email}
+               City: {self.city}
+               ZipCode: {self.country} 
+               Country: {self.zip_code}
+               """

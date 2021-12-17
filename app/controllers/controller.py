@@ -1,11 +1,12 @@
-from app.source.models.mongo_model import Customers, Cars
-from app.source.models.mongo_model import Orders, Products
-from app.source.models.mongo_model import Employees, Offices
-from app.source.models.mongo_model import Manufacturers, Suppliers
+from app.src.models.models_m import Customers, Cars
+from app.src.models.models_m import Orders, Products
+from app.src.models.models_m import Employees, Offices
+from app.src.models.models_m import Manufacturers, Suppliers
 
 
 def fetch_customers():
     for customers in Customers.objects:
+        print('*' * 40)
         print(f"""
         FirstName: {customers.first_name} 
         LastName: {customers.last_name} 
@@ -20,6 +21,7 @@ def fetch_customers():
 
 def fetch_products():
     for product in Products.objects:
+        print('*' * 40)
         print(f"""
             ProductName: {product.prod_name} 
             ProductNumber: {product.prod_number} 
@@ -32,6 +34,7 @@ def fetch_products():
 
 def fetch_orders():
     for orders in Orders.objects:
+        print('*' * 40)
         print(f"""
         QuantityOrdered: {orders.quantity_ordered} 
         OrderDate: {orders.order_date} 
@@ -42,17 +45,19 @@ def fetch_orders():
 
 def fetch_cars():
     for cars in Cars.objects:
+        print('*' * 40)
         print(f"""
-        RegisterNumber: {cars.register_number} 
-        Brand: {cars.brand} 
-        Model: {cars.model}
-        Color: {cars.color}
-        Year: {cars.year}
-        """)
+         RegisterNumber: {cars.register_number}
+         Brand: {cars.brand}
+         Model: {cars.model}
+         Color: {cars.color}
+         Year: {cars.year}
+         """)
 
 
 def fetch_employees():
     for employee in Employees.objects:
+        print('*' * 40)
         print(f"""
         Email: {employee.email} 
         FirstName: {employee.first_name} 
@@ -66,6 +71,7 @@ def fetch_employees():
 
 def fetch_offices():
     for office in Offices.objects:
+        print('*' * 40)
         print(f"""
         OfficeName: {office.office_name} 
         Address: {office.address} 
@@ -78,6 +84,7 @@ def fetch_offices():
 
 def fetch_suppliers():
     for supplier in Suppliers.objects:
+        print('*' * 40)
         print(f"""
         SupplierEmail: {supplier.email} 
         Name: {supplier.name} 
@@ -91,6 +98,7 @@ def fetch_suppliers():
 
 def fetch_manufacturers():
     for manufacturers in Manufacturers.objects:
+        print('*' * 40)
         print(f"""
         ManufacturesEmail: {manufacturers.email} 
         Name: {manufacturers.name} 

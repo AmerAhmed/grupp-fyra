@@ -1,16 +1,16 @@
 from app.controllers.controllers import get_orders, get_resellers
 from app.controllers.controllers import get_manufacturing
-from app.controllers.controllers import get_offices, get_customer_cars
+from app.controllers.controllers import get_offices, get_cars
 from app.controllers.controllers import get_employees, get_customers
 from app.controllers.controllers import get_products
-from app.source.models.mysql_model import Customers
-from app.source.db import session
+from app.src.models.models_s import Customers
+from app.src.db import session
 
 
-def mysql_main():
-    print('*' * 45)
+def main():
+    print('*' * 40)
     print('Welcome to Relational Database in MySQL!')
-    print('*' * 45)
+    print('*' * 40)
     # get_customers()
     """
     customers1 = session.query(Customers).filter(Customers.customers_id == 1).first()
@@ -35,17 +35,16 @@ def mysql_main():
     session.commit()
     get_customers()
     """
-    get_offices()
+    # get_customers()
+    # get_offices()
     # get_employees()
-    # get_customer_cars()
+    #  get_cars()
     # get_manufacturing()
     # get_products()
     # get_orders()
     # get_resellers()
     # get_orders()
 
-    print('*' * 45)
-
 
 if __name__ == '__main__':
-    mysql_main()
+    main()

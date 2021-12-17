@@ -1,14 +1,13 @@
-"""
 from app.controllers.controller import fetch_customers, fetch_products
 from app.controllers.controller import fetch_orders, fetch_cars
 from app.controllers.controller import fetch_offices, fetch_suppliers
 from app.controllers.controller import fetch_employees, fetch_manufacturers
-"""
+
 from mongoengine import connect
 connect(db='companies', username='company', password='myservices', authentication_source='companies')
 
 
-def mongo_main():
+def app():
     print('*' * 45)
     print('Welcome to Object-Document Mapping in MongoDB!')
     print('*' * 45)
@@ -26,4 +25,4 @@ def mongo_main():
 
 
 if __name__ == '__main__':
-    mongo_main()
+    app()
