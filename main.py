@@ -45,15 +45,15 @@ def main():
     session.commit()
     get_customers()
     """
-    # get_customers()
-    # get_offices()
-    # get_employees()
-    # get_cars()
-    # get_manufacturing()
+
     # get_products()
+    # get_cars()
     # get_orders()
-    get_resellers()
-    # get_orders()
+    # get_customers()
+    # get_employees()
+    # get_offices()
+    # get_resellers()
+    # get_manufacturing()
 
 
 if __name__ == '__main__':

@@ -29,15 +29,15 @@ class CustomersHasCustomerCar(Base):
 
 
 class CustomerCarHasProducts(Base):
-    __tablename__ = 'customerCars_has_products'
+    __tablename__ = 'customerCars_has_products1'
 
-    product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
-    customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
+    customerCars_customerCar_id = Column(Integer, ForeignKey('customerCars.customerCar_id'), primary_key=True)
+    products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
     product_has_products = relationship('Products', back_populates='product_has_cars')
     rel_Car_has_products = relationship('CustomerCars', back_populates='customerCars_has_products')
 
     def __repr__(self):
-        return f'{self.product_has_products} {self.customerCar_has_products}'
+        return f'{self.product_has_products} {self.rel_Car_has_products}'
 
 
 class Products(Base):
@@ -57,14 +57,63 @@ class Products(Base):
 
     def __repr__(self):
         return f"""
-        ProductsID:  {self.product_id}
         ProductName: {self.product_name}
         ProductNumber: {self.product_number}
         ProductVendor: {self.product_vendor}
         ProductDescription: {self.product_description}
         QuantityInStock: {self.quantityin_stock}
         BuyPrice: {self.buy_price}
+        OrderedDetails: {self.orders}
+        ProductsDetails: {self.product_has_cars}
         """
+
+
+class CustomerCars(Base):
+    __tablename__ = 'customerCars'
+
+    customerCar_id = Column(Integer, primary_key=True, autoincrement=True)
+    reg_number = Column(String(7), nullable=False)
+    brand = Column(String(100), nullable=False)
+    model = Column(String(100), nullable=False)
+    color = Column(String(50), nullable=False)
+    years = Column(DateTime, default=datetime.datetime.utcnow)
+    customers_cars = relationship('CustomersHasCustomerCar', back_populates='car')
+    customerCars_has_products = relationship('CustomerCarHasProducts',  back_populates='rel_Car_has_products')
+
+    def __repr__(self):
+        return f"""
+        RegisterNumber: {self.reg_number}
+        CarBrand: {self.brand}
+        CarModel: {self.model}
+        CarColor: {self.color} 
+        YearMade: {self.years}
+         """
+
+
+class Orders(Base):
+    __tablename__ = 'orders'
+
+    order_id = Column(Integer, primary_key=True, autoincrement=True)
+    quantity_ordered = Column(Integer)
+    price_each = Column(DECIMAL(10, 2))
+    order_date = Column(DateTime, default=datetime.datetime.utcnow)
+    shipped_date = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
+    product = relationship('Products', back_populates='orders')
+    customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
+    customer = relationship('Customers', back_populates='order')
+
+    def __repr__(self):
+        return f"""
+               OrdersID: {self.order_id}
+               quantityOrdered: {self.quantity_ordered}
+               PriceEach: {self.price_each}
+               OrderDate: {self.order_date} 
+               ShippedDate: {self.shipped_date} 
+               Created_at: {self.created_at}
+               {self.customer}
+               """
 
 
 class Customers(Base):
@@ -86,7 +135,9 @@ class Customers(Base):
 
     def __repr__(self):
         return f"""
-        CustomersID: {self.customers_id}
+        *********************
+        CustomersInformation: 
+        *********************
         Fullname: {self.first_name} {self.last_name}
         Address: {self.address}
         Phone: {self.phone}
@@ -94,58 +145,8 @@ class Customers(Base):
         City: {self.city}
         ZipCode: {self.zip_code} 
         Country: {self.country} 
+        CustomerOrderedDetails: {self.order}
         Customers_has_car: {self.customers_has_car} 
-        """
-
-
-class CustomerCars(Base):
-    __tablename__ = 'customerCars'
-
-    customerCar_id = Column(Integer, primary_key=True, autoincrement=True)
-    reg_number = Column(String(7), nullable=False)
-    brand = Column(String(100), nullable=False)
-    model = Column(String(100), nullable=False)
-    color = Column(String(50), nullable=False)
-    years = Column(DateTime, default=datetime.datetime.utcnow)
-    customers_cars = relationship('CustomersHasCustomerCar', back_populates='car')
-    customerCars_has_products = relationship('CustomerCarHasProducts',  back_populates='rel_Car_has_products')
-
-    def __repr__(self):
-        return f"""
-        CustomerCarDI: {self.customerCar_id}
-        RegisterNumber: {self.reg_number}
-        CarBrand: {self.brand}
-        CarModel: {self.model}
-        CarColor: {self.color} 
-        YearMade: {self.years}
-         """
-
-
-class Offices(Base):
-    __tablename__ = 'offices'
-
-    offices_id = Column(Integer, primary_key=True, autoincrement=True)
-    offices_code = Column(Integer)
-    offices_name = Column(String(100), nullable=False)
-    address = Column(String(100), nullable=False)
-    phone = Column(String(100), nullable=False)
-    employee_name = Column(String(100), nullable=False)
-    employee_phone = Column(String(100), nullable=False)
-    employee_email = Column(String(100), nullable=False)
-    employee = relationship('Employees', back_populates='offices')
-
-    def __repr__(self):
-        return f"""
-        OfficesID: {self.offices_id}
-        OfficesCode: {self.offices_code} 
-        OfficesName: {self.offices_name} 
-        Addresses: {self.address} 
-        Phone: {self.phone}
-        EmployeesName: {self.employee_name} 
-        EmployeesPhone: {self.employee_phone} 
-        EmployeesEmail: {self.employee_email}
-        ********************************
-        EmployeesInfo: {self.employee}
         """
 
 
@@ -163,43 +164,39 @@ class Employees(Base):
 
     def __repr__(self):
         return f"""
-        EmployeeID: {self.employee_id}
         FirstName: {self.first_name} 
         LastName: {self.last_name} 
         Email: {self.email} 
         Phone: {self.phone}
-        ********************************
-        CustomerDetails: {self.customers}
+        {self.customers}
         """
 
 
-class Orders(Base):
-    __tablename__ = 'orders'
+class Offices(Base):
+    __tablename__ = 'offices'
 
-    order_id = Column(Integer, primary_key=True, autoincrement=True)
-    quantity_ordered = Column(Integer)
-    price_each = Column(DECIMAL(10, 2))
-    order_date = Column(DateTime, default=datetime.datetime.utcnow)
-    shipped_date = Column(DateTime, default=datetime.datetime.utcnow)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    products_product_id = Column(Integer, ForeignKey('products.product_id'), primary_key=True)
-    product = relationship('Products', back_populates='orders')
-    customers_customers_id = Column(Integer, ForeignKey('customers.customers_id'), primary_key=True)
-    customer = relationship('Customers', back_populates='order')
+    offices_id = Column(Integer, primary_key=True, autoincrement=True)
+    offices_code = Column(Integer)
+    offices_name = Column(String(100), nullable=False)
+    address = Column(String(100), nullable=False)
+    phone = Column(String(100), nullable=False)
+    employee_name = Column(String(100), nullable=False)
+    employee_phone = Column(String(100), nullable=False)
+    employee_email = Column(String(100), nullable=False)
+    employee = relationship('Employees', back_populates='offices')
 
     def __repr__(self):
         return f"""
-               *************
-               OrderDetails:
-               *************
-               OrdersID: {self.order_id}
-               quantityOrdered: {self.quantity_ordered}
-               PriceEach: {self.price_each}
-               OrderDate: {self.order_date} 
-               ShippedDate: {self.shipped_date} 
-               Created_at: {self.created_at}
-               {self.customer}
-               """
+        OfficesCode: {self.offices_code} 
+        OfficesName: {self.offices_name} 
+        Addresses: {self.address} 
+        Phone: {self.phone}
+        EmployeesName: {self.employee_name} 
+        EmployeesPhone: {self.employee_phone} 
+        EmployeesEmail: {self.employee_email}
+        *************************************
+        EmployeesInformation: {self.employee}
+        """
 
 
 class Resellers(Base):
@@ -217,12 +214,15 @@ class Resellers(Base):
 
     def __repr__(self):
         return f"""
-            ResellerID: {self.reseller_id}
-            Name: {self.reseller_name}
+            ****************
+            ResellerDetails:
+            ****************
+            ResellerName: {self.reseller_name}
             Address: {self.address}
             ContactPerson: {self.contact_name}
             Phone: {self.phone} 
             Email: {self.email}
+            ProductsDetails: {self.products}
             """
 
 
@@ -242,11 +242,10 @@ class Manufacturer(Base):
 
     def __repr__(self):
         return f"""
-               ******************
-               ManufacturingInfo:
-               ******************
-               ManufacturingID: {self. manufacturer_id}
-               Name: {self.manufacturer_name}
+               *************************
+               ManufacturingInformation:
+               *************************
+               ManufacturingName: {self.manufacturer_name}
                Address: {self.address}
                ContactPerson: {self.contact_name} 
                Phone: {self.phone} 
@@ -254,5 +253,4 @@ class Manufacturer(Base):
                City: {self.city}
                ZipCode: {self.country} 
                Country: {self.zip_code}
-               {self.resellers}
                """
